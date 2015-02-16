@@ -2,6 +2,7 @@
 
 namespace Metar\Command;
 
+use GuzzleHttp\Client;
 use Metar\AviationWeather\AviationWeather;
 use METAR\Message;
 use Symfony\Component\Console\Command\Command;
@@ -23,7 +24,7 @@ class MetarShowCommand extends Command
     {
         $code = $input->getArgument('code');
 
-        $aviationWeather = new AviationWeather();
+        $aviationWeather = new AviationWeather(new Client());
         $metar = $aviationWeather->getMetar($code);
 
         $this->outputWeather($output, $metar);
